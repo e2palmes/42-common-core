@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediba-de <marvin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 14:24:41 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/13 14:25:21 by ediba-de         ###   ########.fr       */
+/*   Created: 2025/11/13 15:45:22 by ediba-de          #+#    #+#             */
+/*   Updated: 2025/11/13 16:12:30 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_bzero(void *s, unsigned int n)
 {
-	int	index;
+	int		index;
+	char	*s_;
 
+	s_ = (char *)s;
 	index = 0;
 	while (index < n)
 	{
-		s[index] = '\0';
+		s_[index] = '\0';
 		index++;
 	}
 }
