@@ -6,11 +6,13 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 16:29:57 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/13 16:30:00 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/14 13:41:16 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlen(char *str)
+#include "libft.h"
+
+size_t	ft_strlen(char *str)
 {
 	int	i;
 

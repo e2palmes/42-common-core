@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 16:12:51 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/14 13:36:57 by ediba-de         ###   ########.fr       */
+/*   Created: 2025/11/14 16:32:29 by ediba-de          #+#    #+#             */
+/*   Updated: 2025/11/14 16:39:38 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	LIBFT_H
-#define	LIBFT_H
+int	ft_tolower(int c)
+{
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	return (c);
+}
 
-#include <stddef.h>
+/*
+#include<stdio.h>
 
-#endif
+int     main()
+{
+        char *str = "Mi Nombre M1guel";
+        while(*str)
+        {
+                printf("%c", ft_tolower(*str));
+                *str++;
+        }
+}*/

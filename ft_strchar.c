@@ -1,0 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchar.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 16:41:21 by ediba-de          #+#    #+#             */
+/*   Updated: 2025/11/14 18:06:24 by ediba-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+char	*ft_strchr(const char *str, int c)
+{
+	char	*s;
+
+	*s = str;
+	while (*s)
+	{
+		if (*s == c)
+			return (s);
+		*s++;
+	}
+	return (NULL);
+}
+
+/*
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+
+    const char * source = "The C Language";
+    char * destination;
+    char * pointer;
+    int length = strlen( source );
+    
+    // We clone the inital string
+    destination = (char *) malloc( sizeof( char) * (length+1) );
+    strcpy( destination, source );
+        
+    // We replace all 'a' characters
+    pointer = ft_strchr( destination, 'a' )
+    *pointer = 'A';
+    
+    // Display result : The C LAnguAge
+    printf( "Result : %s\n", destination );
+        
+    // Release dynamicly allocated memory
+    free( destination );
+    
+    return 0;
+}*/
