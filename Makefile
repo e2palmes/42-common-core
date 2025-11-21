@@ -1,0 +1,6 @@
+CFILES: 
+
+
+all: prog
+
+prog: 
