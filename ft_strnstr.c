@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 19:08:50 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 11:00:19 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:03:08 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strnstr(const char *str, const char *searched, size_t len)
 	i = 0;
 	while ((i < len) && *s != '\0')
 	{
-		if(*s == *l)
+		if (*s == *l)
 		{
 			j = 0;
 			while (s[j] == l[j])

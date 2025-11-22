@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 02:13:34 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/17 18:44:14 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:04:16 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ int main() {
     printf("memcmp: %d\n", memcmp( array2, array1, size));
     printf("ft_memcmp: %d\n", ft_memcmp( array2, array1, size));
 
-    // assert( memcmp( array1, array2, size) == ft_memcmp( array1, array2, size) );
-    // assert( memcmp( array1, array1, size) == ft_memcmp( array1, array1, size) );
-    // assert( memcmp( array2, array1, size) == ft_memcmp( array2, array1, size) );
+// assert( memcmp( array1, array2, size) == 
+// 	ft_memcmp( array1, array2, size) );
+// assert( memcmp( array1, array1, size) ==
+// 	ft_memcmp( array1, array1, size) );
+// assert( memcmp( array2, array1, size) ==
+// 	ft_memcmp( array2, array1, size) );
 
     printf( "Test is ok\n" );
 

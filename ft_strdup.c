@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 19:17:47 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/21 21:42:57 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 17:47:27 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s)
 	if (!str)
 		return ('\0');
 	i = 0;
-	while(s[i])
+	while (s[i])
 	{
 		str[i] = s[i];
 		i++;

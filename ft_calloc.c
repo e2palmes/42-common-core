@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 16:26:48 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 11:01:32 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 17:59:47 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	unsigned char 	*temp;
+	unsigned char	*temp;
 	size_t			i;
 
 	temp = malloc(nmemb * size);
 	if (!temp)
 		return ('\0');
 	i = 0;
-	while(i < nmemb * size)
+	while (i < nmemb * size)
 	{
 		temp[i] = '\0';
 		i++;
