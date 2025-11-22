@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:03:54 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/14 17:59:08 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 00:59:10 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	int	index;
 	int	srclen;
 	int	destlen;
-	int	offset;
+	size_t	offset;
 
 	index = 0;
 	srclen = 0;

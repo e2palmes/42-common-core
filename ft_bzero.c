@@ -6,13 +6,15 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:45:22 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/13 16:12:30 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/21 23:54:44 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_bzero(void *s, unsigned int n)
+#include "libft.h"
+
+void	ft_bzero(void *s, size_t n)
 {
-	int		index;
+	size_t	index;
 	char	*s_;
 
 	s_ = (char *)s;

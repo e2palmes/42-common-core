@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:59:29 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/15 02:06:28 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 10:56:03 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memchr(const void *s, int c, size_t size)
 {
-	int					index;
+	size_t				index;
 	const unsigned char	*str;
 
 	index = 0;
@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t size)
 	while (index < size)
 	{
 		if (str[index] == (unsigned char)c)
-			return (&(s[index]));
+			return ((void *) &str[index]);
 		index++;
 	}
 	return (NULL);

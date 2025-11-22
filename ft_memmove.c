@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:20:32 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/13 18:23:33 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 00:27:13 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	*ft_memmove(void *destination, const void *source, size_t size)
 {
-	int		index;
+	size_t	index;
 	char	*dest;
 
 	dest = (char *)destination;
 	index = 0;
-	if (dest < source)
+	if (dest < (char *)source)
 	{
 		while (index < size)
 		{

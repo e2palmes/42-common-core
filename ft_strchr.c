@@ -6,22 +6,24 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:41:21 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/14 18:06:24 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/21 23:36:08 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strchr(const char *str, int c)
 {
 	char	*s;
+	int	index;
 
-	*s = str;
-	while (*s)
+	s = (char *)str;
+	index = 0;
+	while (s[index])
 	{
-		if (*s == c)
-			return (s);
-		*s++;
+		if (s[index] == c)
+			return (&s[index]);
+		index++;
 	}
-	return (NULL);
+	return ('\0');
 }
 
 /*
@@ -35,20 +37,22 @@ int main() {
     char * destination;
     char * pointer;
     int length = strlen( source );
-    
+
     // We clone the inital string
     destination = (char *) malloc( sizeof( char) * (length+1) );
     strcpy( destination, source );
-        
+
     // We replace all 'a' characters
-    pointer = ft_strchr( destination, 'a' )
-    *pointer = 'A';
-    
+    while (pointer = ft_strchr( destination, 'a' ) ) {
+	    printf("found char: %c\n", *pointer);
+	    *pointer = 'A';
+    }
+
     // Display result : The C LAnguAge
     printf( "Result : %s\n", destination );
-        
+
     // Release dynamicly allocated memory
     free( destination );
-    
+
     return 0;
 }*/

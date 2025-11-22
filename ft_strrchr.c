@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:03:23 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/14 18:02:28 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 10:46:03 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -16,8 +16,8 @@ char	*strrchr(const char *str, int c)
 	int		index;
 	char	*s;
 
-	*s = str;
-	index = ft_strlen(str) - 1;
+	s = (char *)str;
+	index = ft_strlen((char *)str) - 1;
 	while (index >= 0)
 	{
 		if (s[index] == c)

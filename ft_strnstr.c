@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 19:08:50 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/18 16:48:49 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:00:19 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strnstr(const char *str, const char *searched, size_t len)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 	char	*s;
 	char	*l;
 

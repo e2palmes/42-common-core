@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 16:30:58 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/14 18:05:00 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/22 00:06:14 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memcpy(void *destination, const void *source, size_t size)
 {
-	int		index;
+	size_t	index;
 	char	*dest;
 
 	dest = (char *)destination;
