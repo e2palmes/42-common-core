@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:41:21 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 17:57:25 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:31:47 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*ft_strchr(const char *str, int c)
 	}
 	return ('\0');
 }
-
 /*
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 21:10:50 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 22:43:10 by ediba-de         ###   ########.fr       */
+/*   Created: 2025/11/22 22:40:55 by ediba-de          #+#    #+#             */
+/*   Updated: 2025/11/22 23:53:04 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
+	size_t	len1;
+	size_t	total_len;
 	size_t	index;
+	char	*str;
 
-	str = malloc(len + 1);
+	len1 = ft_strlen((char *)s1);
+	total_len = len1 + ft_strlen((char *)s2);
+	index = 0;
+	str = malloc(total_len * sizeof(char) + 1);
 	if (!str)
 		return ('\0');
-	while (index < len)
+	while (s1[index] && index < len1)
 	{
-		if (s[start])
-		{
-			str[index] = s[start];
-			start++;
-		}
-		else
-			str[index] = '\0';
+		str[index] = s1[index];
 		index++;
 	}
+	index = 0;
+	while (s2[index] && index + len1 < total_len)
+	{
+		str[len1 + index] = s2[index];
+		index++;
+	}
+	str[index + len1] = '\0';
 	return (str);
 }
