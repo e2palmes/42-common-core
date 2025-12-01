@@ -21,7 +21,18 @@ CFILES = \
 	ft_strnstr.c \
 	ft_atoi.c \
 	ft_calloc.c \
-	ft_strdup.c
+	ft_strdup.c \
+	ft_substr \
+	ft_strjoin \
+	ft_strtrim \
+	ft_split \
+	ft_itoa \
+	ft_strmapi \
+	ft_striteri \
+	ft_putchar_fd \
+	ft_putstr_fd \
+	ft_putendl_fd \
+	ft_putnbr_fd \
 OFILES = $(CFILES:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:35:30 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/26 17:26:18 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/27 14:28:43 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_int_len(int n)
 	return (len);
 }
 
-static char *alloc_str(int n, int len)
+static char	*alloc_str(int n, int len)
 {
 	char	*str;
 
@@ -46,8 +46,8 @@ static char *alloc_str(int n, int len)
 char	*ft_itoa(int n)
 {
 	long	nbr;
-	int	len;
-	int	index;
+	int		len;
+	int		index;
 	char	*str;
 
 	nbr = (long)n;

@@ -5,52 +5,103 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 13:46:52 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/25 15:06:46 by ediba-de         ###   ########.fr       */
+/*   Created: 2025/12/01 11:08:10 by ediba-de          #+#    #+#             */
+/*   Updated: 2025/12/01 16:05:08 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-int	word_count(char *str, char c)
+static void	get_next_word(char **nextword, size_t *nextword_len, char c)
 {
-	int	count;
-	int	index;
-	int	is_word;
+		size_t	i;
 
-	index = 0;
-	count = 0;
-	is_word = 0;
-	while (str[index])
-	{
-		if (str[index] != c && !is_word)
+		*nextword += *nextword_len;
+		*nextword_len = 0;
+		i = 0;
+		while (**nextword && **nextword == c)
+				(*nextword)++;
+		while ((*nextword)[i])
 		{
-			count++;
-			is_word = 1;
+				if ((*nextword)[i] == c)
+						return ;
+				(*nextword_len)++;
+				i++;
 		}
-		else if (str[index] == c)
-			is_word = 0;
-		index++;
-	}
-	return (count);
+}
+
+static char	**free_array(char **array)
+{
+		int	i;
+
+		i = 0;
+		while (array[i])
+		{
+				free(array[i]);
+				i++;
+		}
+		free(array);
+		return (NULL);
+}
+
+static size_t	word_count(const char *str, char c)
+{
+		int count;
+		int i;
+
+		i = 0;
+		count = 0;
+		while (str[i])
+		{
+				while (str[i] && str[i] == c)
+						i++;
+				if (str[i])
+						count++;
+				while (str[i] && !(str[i] == c))
+						i++;
+		}
+		return (count);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	*str;
-	int	index;
-	int	strlen;
 	char	**array;
+	char	*nextword;
+	size_t	nextword_len;
+	size_t	i;
 
-	index = 0;
-	str = (char *)str;
-	strlen = ft_strlen(s);
-	str = ft_calloc((word_count(str, c) + 1), sizeof(char *));
-	if (!str)
+	if(!s)
 		return ('\0');
-	while (index < strlen)
+	array = malloc(sizeof(char *) * (word_count(s, c)));
+	if (!array)
+		return ('\0');
+	i = 0;
+	nextword = (char *)s;
+	nextword_len = 0;
+	while (i < word_count(s, c))
 	{
-		str = '';
-		index++;
+		get_next_word(&nextword, &nextword_len, c);
+		array[i] = malloc((nextword_len + 1) * sizeof(char));
+		if (!array[i])
+			return (free_array(array));
+		ft_strlcpy(array[i], nextword, nextword_len + 1);
 	}
+	array[i] = '\0';
+	return (array);
+}
+
+#include <stdio.h>
+
+int main(void)
+{
+        char str[] = ",Bonjour,tout,le,,monde,,";
+        char **arr = ft_split(str, ',');
+
+        int     i = 0;
+        while (arr[i])
+        {
+                printf("%s-", arr[i]);
+                i++;
+        }
 }

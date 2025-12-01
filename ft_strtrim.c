@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 16:15:35 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/24 23:40:20 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/11/27 14:31:28 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static int	count_no_set_chars(const char *s, const char *set)
 {
-	int	n;
-	char 	*str;
+	int		n;
+	char	*str;
 
 	n = 0;
 	str = (char *)s;
@@ -31,10 +31,10 @@ static int	count_no_set_chars(const char *s, const char *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	len;
+	int		len;
 	char	*trimmed;
 	char	*str;
-	int	index;
+	int		index;
 
 	len = count_no_set_chars(s1, set);
 	trimmed = malloc(len * sizeof(char) + 1);
