@@ -6,25 +6,23 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:35:30 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/27 14:28:43 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:21:42 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-static int	get_int_len(int n)
+static int	int_len(long n)
 {
 	int	len;
 
-	len = 0;
-	if (n == 0)
-		return (1);
-	else if (n < 0)
+	len = 1;
+	if (n < 0)
 	{
-		n *= -1;
 		len++;
+		n = -n;
 	}
-	while (n > 0)
+	while (n >= 10)
 	{
 		n /= 10;
 		len++;
@@ -32,48 +30,43 @@ static int	get_int_len(int n)
 	return (len);
 }
 
-static char	*alloc_str(int n, int len)
-{
-	char	*str;
-
-	str = malloc((len) * sizeof(char));
-	if (!len)
-		return (0);
-	str[len - 1] = 0;
-	return (str);
-}
-
 char	*ft_itoa(int n)
 {
 	long	nbr;
 	int		len;
-	int		index;
 	char	*str;
 
-	nbr = (long)n;
-	len = get_int_len(n) + 1;
-	str = alloc_str(n, len);
+	nbr = n;
+	len = int_len(nbr);
+	str = malloc(len + 1);
 	if (!str)
-		return (0);
-	index = len - 2;
-	nbr = -nbr;
-	while (nbr != 0)
+		return (NULL);
+	str[len] = '\0';
+	if (nbr < 0)
+		nbr = -nbr;
+	while (len--)
 	{
-		str[index] = (nbr % 10) + 48;
+		if (n < 0 && len == 0)
+		{
+			str[0] = '-';
+			break ;
+		}
+		str[len] = (nbr % 10) + '0';
 		nbr /= 10;
-		index--;
 	}
-	if (n < 0)
-		str[0] = '-';
 	return (str);
 }
+
 /*
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {
-	int nb = -4284;
-	char *str = ft_itoa(nb);
+	int nb = -2147483647;
+	char *s1 = ft_itoa(nb);
+	//char *s2 = itoa(nb);
 
-	printf("str: %s\n", str);
+	printf("ft_itoa: %s\n", s1);
+	//printf("itoa: %s\n", s2);
 }*/

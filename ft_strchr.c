@@ -6,24 +6,23 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:41:21 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/24 23:31:47 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:24:23 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 char	*ft_strchr(const char *str, int c)
 {
-	char	*s;
-	int		index;
-
-	s = (char *)str;
-	index = 0;
-	while (s[index])
+	while (*str)
 	{
-		if (s[index] == c)
-			return (&s[index]);
-		index++;
+		if (*str == (char)c)
+			return ((char *)str);
+		str++;
 	}
-	return ('\0');
+	if ((char)c == '\0')
+		return ((char *)str);
+	return (NULL);
 }
 /*
 #include <stdio.h>
@@ -32,26 +31,13 @@ char	*ft_strchr(const char *str, int c)
 
 int main() {
 
-    const char * source = "The C Language";
-    char * destination;
-    char * pointer;
-    int length = strlen( source );
-
-    // We clone the inital string
-    destination = (char *) malloc( sizeof( char) * (length+1) );
-    strcpy( destination, source );
-
-    // We replace all 'a' characters
-    while (pointer = ft_strchr( destination, 'a' ) ) {
-	    printf("found char: %c\n", *pointer);
-	    *pointer = 'A';
-    }
+    char *src = "there is so \0ma\0ny \0 \\0 in t\0his stri\0ng !\0\0\0\0";
+    char *d1 = strchr(src, 'e');
+    char *d2 = ft_strchr(src, 'e');
 
     // Display result : The C LAnguAge
-    printf( "Result : %s\n", destination );
-
-    // Release dynamicly allocated memory
-    free( destination );
+    printf( "strchr : %s\n", d1 );
+    printf( "ft_strchr : %s\n", d2 );
 
     return 0;
 }*/

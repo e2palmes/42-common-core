@@ -6,20 +6,21 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 19:17:47 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 17:47:27 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:01:29 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strdup(const char *s)
 {
 	char	*str;
 	size_t	i;
 
-	str = malloc(sizeof(s));
+	str = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!str)
-		return ('\0');
+		return (NULL);
 	i = 0;
 	while (s[i])
 	{
@@ -35,7 +36,7 @@ int main() {
     const char * original = "The original string.";
 
     // On duplique la chaîne de caractères initiale.
-    char * copy = strdup( original );
+    char * copy = ft_strdup( original );
 
     // On passe chaque lettre en majuscule.
     char * ptr = copy;

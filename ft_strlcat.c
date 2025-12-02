@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:03:54 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 17:58:24 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:50:51 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,22 @@
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	int		index;
-	int		srclen;
-	int		destlen;
-	size_t	offset;
+	size_t	index;
+	size_t	slen;
+	size_t	dlen;
 
 	index = 0;
-	srclen = 0;
-	destlen = 0;
-	while (dest[destlen])
-		destlen++;
-	while (src[srclen])
-		srclen++;
-	offset = destlen;
-	while (*(src + index) != '\0')
+	slen = ft_strlen(src);
+	dlen = ft_strlen(dest);
+	if (size <= dlen)
+		return (slen + size);
+	while (src[index] && dlen + index < size - 1)
 	{
-		dest[offset] = *(src + index);
-		offset++;
+		dest[dlen + index] = *(src + index);
 		index++;
-		if (offset == size - 1)
-			break ;
 	}
-	dest[offset] = '\0';
-	return (srclen + destlen);
+	dest[dlen + index] = '\0';
+	return (slen + dlen);
 }
 /*
 #include <stdio.h>

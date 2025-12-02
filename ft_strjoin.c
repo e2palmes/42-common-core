@@ -6,11 +6,12 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 22:40:55 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 23:53:04 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:45:13 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -24,7 +25,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	index = 0;
 	str = malloc(total_len * sizeof(char) + 1);
 	if (!str)
-		return ('\0');
+		return (NULL);
 	while (s1[index] && index < len1)
 	{
 		str[index] = s1[index];

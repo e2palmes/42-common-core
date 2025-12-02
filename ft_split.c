@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:08:10 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/12/01 16:05:08 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/01 18:14:32 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,53 @@
 
 static void	get_next_word(char **nextword, size_t *nextword_len, char c)
 {
-		size_t	i;
+	size_t	i;
 
-		*nextword += *nextword_len;
-		*nextword_len = 0;
-		i = 0;
-		while (**nextword && **nextword == c)
-				(*nextword)++;
-		while ((*nextword)[i])
-		{
-				if ((*nextword)[i] == c)
-						return ;
-				(*nextword_len)++;
-				i++;
-		}
+	*nextword += *nextword_len;
+	*nextword_len = 0;
+	i = 0;
+	while (**nextword && **nextword == c)
+			(*nextword)++;
+	while ((*nextword)[i])
+	{
+		if ((*nextword)[i] == c)
+			return ;
+		(*nextword_len)++;
+		i++;
+	}
 }
 
 static char	**free_array(char **array)
 {
-		int	i;
+	int	i;
 
-		i = 0;
-		while (array[i])
-		{
-				free(array[i]);
-				i++;
-		}
-		free(array);
-		return (NULL);
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	return (NULL);
 }
 
 static size_t	word_count(const char *str, char c)
 {
-		int count;
-		int i;
+	int	count;
+	int	i;
 
-		i = 0;
-		count = 0;
-		while (str[i])
-		{
-				while (str[i] && str[i] == c)
-						i++;
-				if (str[i])
-						count++;
-				while (str[i] && !(str[i] == c))
-						i++;
-		}
-		return (count);
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		while (str[i] && str[i] == c)
+			i++;
+		if (str[i])
+			count++;
+		while (str[i] && !(str[i] == c))
+			i++;
+	}
+	return (count);
 }
 
 char	**ft_split(char const *s, char c)
@@ -71,11 +71,11 @@ char	**ft_split(char const *s, char c)
 	size_t	nextword_len;
 	size_t	i;
 
-	if(!s)
-		return ('\0');
-	array = malloc(sizeof(char *) * (word_count(s, c)));
+	if (!s)
+		return (NULL);
+	array = malloc(sizeof(char *) * (word_count(s, c) + 1));
 	if (!array)
-		return ('\0');
+		return (NULL);
 	i = 0;
 	nextword = (char *)s;
 	nextword_len = 0;
@@ -86,11 +86,12 @@ char	**ft_split(char const *s, char c)
 		if (!array[i])
 			return (free_array(array));
 		ft_strlcpy(array[i], nextword, nextword_len + 1);
+		i++;
 	}
-	array[i] = '\0';
+	array[i] = 0;
 	return (array);
 }
-
+/*
 #include <stdio.h>
 
 int main(void)
@@ -104,4 +105,4 @@ int main(void)
                 printf("%s-", arr[i]);
                 i++;
         }
-}
+}*/

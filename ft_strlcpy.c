@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 12:33:10 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 00:54:10 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:20:40 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	size_t	index;
 
 	if (size == 0)
-		return (ft_strlen((char *)src));
+		return (ft_strlen(src));
 	index = 0;
-	while (index < size - 1)
+	while (index < size - 1 && src[index])
 	{
 		dest[index] = src[index];
 		index++;

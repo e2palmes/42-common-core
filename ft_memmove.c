@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:20:32 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/22 00:27:13 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:52:54 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void	*ft_memmove(void *destination, const void *source, size_t size)
 {
-	size_t	index;
-	char	*dest;
+	size_t				index;
+	unsigned char		*dest;
+	const unsigned char	*src;
 
-	dest = (char *)destination;
+	dest = (unsigned char *)destination;
+	src = (const unsigned char *)source;
 	index = 0;
-	if (dest < (char *)source)
+	if (dest < src)
 	{
 		while (index < size)
 		{
@@ -27,19 +29,17 @@ void	*ft_memmove(void *destination, const void *source, size_t size)
 			index++;
 		}
 	}
-	else
+	else if (dest > src)
 	{
-		while (index < size)
-		{
-			dest[size - index] = ((char *)source)[size - index];
-			index++;
-		}
+		while (size--)
+			dest[size] = src[size];
 	}
 	return (destination);
 }
 /*
 #define ELEMENT_COUNT 10
-
+#include <stdio.h>
+#include <string.h>
 int main() {
 
     // On crée une zone de mémoire de 10 entiers et contenant
@@ -56,7 +56,7 @@ int main() {
     void * source = (void *) data;
     void * destination = (void *) ( data + 1 );
     size_t size = ELEMENT_COUNT * sizeof( int );
-    memmove( destination, source, size );
+    ft_memmove( destination, source, size );
 
     // ... pour y insérer une nouvelle valeur en tête
     data[0] = 10;
@@ -67,5 +67,5 @@ int main() {
     }
     puts( "" );  // Un retour à la ligne
 
-    return EXIT_SUCCESS;
+    return 0;
 }*/

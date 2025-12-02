@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 23:46:40 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/27 14:29:48 by ediba-de         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:55:51 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	index;
-	int				len;
-	char			*str;
+	size_t	index;
+	size_t	len;
+	char	*str;
 
 	len = ft_strlen((char *)s);
 	str = malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
 	index = 0;
 	while (s[index] && index < len)
 	{
