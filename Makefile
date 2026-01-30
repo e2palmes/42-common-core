@@ -11,17 +11,21 @@ OFILES = $(CFILES:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
-LIBFT = libft.a
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
 clean:
+	make -C libft clean
 	rm -f $(OFILES)
 
 fclean:
+	make -C libft fclean
 	rm -f $(NAME) $(OFILES)
 
 $(NAME): $(OFILES)
+	make -C libft
 	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OFILES)
 

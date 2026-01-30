@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:08:10 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/12/01 18:14:32 by ediba-de         ###   ########.fr       */
+/*   Updated: 2026/01/30 02:12:18 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	get_next_word(char **nextword, size_t *nextword_len, char c)
 	*nextword_len = 0;
 	i = 0;
 	while (**nextword && **nextword == c)
-			(*nextword)++;
+		(*nextword)++;
 	while ((*nextword)[i])
 	{
 		if ((*nextword)[i] == c)

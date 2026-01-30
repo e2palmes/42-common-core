@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 12:38:03 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/11/27 14:22:37 by ediba-de         ###   ########.fr       */
+/*   Updated: 2026/01/30 02:13:41 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	index;
-	int				len;
 
-	len = ft_strlen(s);
 	index = 0;
 	while (s[index])
 	{
