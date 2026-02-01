@@ -6,18 +6,17 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:11:44 by ediba-de          #+#    #+#             */
-/*   Updated: 2025/12/28 00:04:23 by ediba-de         ###   ########.fr       */
+/*   Updated: 2026/02/01 14:50:07 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
-
+# include "libft/libft.h"
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdio.h>
+# include <stdlib.h>
 
 int	ft_printf(const char *str, ...);
 int	ft_printchar(char c);
