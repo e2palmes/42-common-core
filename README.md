@@ -14,6 +14,10 @@ A `libftprintf.a` is generated at the root of the repository. There is also the 
 - compile with `make` command
 - the `libftprintf.a` should have been generated at the root of repository
 
+if you have a main.c file using the library, compile it as follows:
+`cc main.c libftprintf.a -o prog`
+with prog being your program compiled output 
+
 ### How to use the library
 You can embed the library to another one by copying the `libftprintf.a` file
 or use it directly on your code with sources by including the `ft_printf.h` file header
