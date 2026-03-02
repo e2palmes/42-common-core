@@ -1,0 +1,12 @@
+[submodule "libft"]
+	path = libft
+	url = ./libft
+[submodule "born2beroot"]
+	path = born2beroot
+	url = ./born2beroot
+[submodule "getnextline"]
+	path = getnextline
+	url = ./getnextline
+[submodule "ft_printf"]
+	path = ft_printf
+	url = ./ft_printf
