@@ -38,8 +38,28 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
+char	*ft_strdup(const char *s)
+{
+	char	*str;
+	size_t	i;
+
+	str = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
 char	*ft_strchr(const char *str, int c)
 {
+	if (str == NULL)
+		return (NULL);
 	while (*str)
 	{
 		if (*str == (char)c)
