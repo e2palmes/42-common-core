@@ -7,12 +7,8 @@ char	*get_next_line(int fd)
 	static char	*stash;
 	char *line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
-		{
-			free(stash);
-			stash = NULL;
-			return (NULL);
-		}
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	stash = set_stash(fd, stash);
 	if (!stash || stash[0] == '\0')
 	{
@@ -35,8 +31,6 @@ char	*set_stash(int fd, char *stash)
 	if (buf == NULL)
 		return (NULL);
 	bytes_read = 1;
-	if (!stash) //
-		stash = ft_strdup("");
 	while (bytes_read > 0 && ft_strchr(stash, '\n') == NULL)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
@@ -56,9 +50,7 @@ char	*set_stash(int fd, char *stash)
 			new_stash = ft_strjoin(stash, buf);
 			free(stash);
 			stash = new_stash;
-		}
-		if (ft_strchr(buf, '\n')) //
-			break ;
+		}	
 	}
 	free(buf);
 	return (stash);
@@ -72,8 +64,8 @@ char	*_get_line(char *stash)
 	if (stash == NULL || stash[0] == '\0')
 		return (NULL);
 	i = 0;
-	while (stash[i] && stash[i] != '\n')
-		i++;
+	while (stash[i] && stash[i++] != '\n')
+		continue;
 	line = malloc((i + 1) * sizeof(char));
 	if (line == NULL)
 		return (NULL);
@@ -124,10 +116,14 @@ char	*update_stash(char *stash)
 // int main()
 // {
 // 	int fd;
-// 	fd = open("test.txt", O_RDONLY);
+// 	fd = open("only_nl.txt", O_RDONLY);
 // 	char *line = get_next_line(fd);
-// 	// char *line2 = get_next_line(fd);
+// 	char *line2 = get_next_line(fd);
+// 	char *line3 = get_next_line(fd);
+// 	char *line4 = get_next_line(fd);
 // 	printf("line 1: %s", line);
-// 	// printf("line 2: %s", line2);
+// 	printf("line 2: %s", line2);
+// 	printf("line 3: %s", line3);
+// 	printf("line 4: %s", line4);
 // 	return (0);
 // }
