@@ -10,50 +10,48 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = set_stash(fd, stash);
-	if (!stash || stash[0] == '\0')
+	if (!stash)
 	{
 		free(stash);
 		stash = NULL;
 		return (NULL);
 	}
 	line = _get_line(stash);
+	if (!line) // Si la création de la ligne échoue, on clean tout
+    {
+        free(stash);
+        stash = NULL;
+        return (NULL);
+    }
 	stash = update_stash(stash);
 	return (line);
 }
 
-char	*set_stash(int fd, char *stash)
+char    *set_stash(int fd, char *stash)
 {
-	char	*buf;
-	char	*new_stash;
-	int		bytes_read;
+    char    *buf;
+    int     bytes_read;
 
-	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (buf == NULL)
-		return (NULL);
-	bytes_read = 1;
-	while (bytes_read > 0 && ft_strchr(stash, '\n') == NULL)
-	{
-		bytes_read = read(fd, buf, BUFFER_SIZE);
-		if (bytes_read < 0)
-		{
-			free(buf);
-			free(stash);
-			return (NULL);
-		}
-		if (bytes_read == 0)
-			break ;
-		buf[bytes_read] = '\0';
-		if (stash == NULL)
-			stash = ft_strdup(buf);
-		else
-		{
-			new_stash = ft_strjoin(stash, buf);
-			free(stash);
-			stash = new_stash;
-		}	
-	}
-	free(buf);
-	return (stash);
+    buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
+    if (!buf)
+        return (free(stash), NULL);
+    bytes_read = 1;
+    while (bytes_read > 0)
+    {
+        bytes_read = read(fd, buf, BUFFER_SIZE);
+        if (bytes_read == -1)
+            return (free(buf), free(stash), NULL);
+        if (bytes_read == 0)
+            break ;
+        buf[bytes_read] = '\0';
+        stash = ft_strjoin(stash, buf);
+        if (!stash) // Si strjoin échoue (malloc NULL_CHECK)
+            return (free(buf), NULL);
+        if (ft_strchr(buf, '\n')) // OPTIMISATION : on ne cherche que dans le buffer lu
+            break ;
+    }
+    free(buf);
+    return (stash);
 }
 
 char	*_get_line(char *stash)
@@ -64,8 +62,10 @@ char	*_get_line(char *stash)
 	if (stash == NULL || stash[0] == '\0')
 		return (NULL);
 	i = 0;
-	while (stash[i] && stash[i++] != '\n')
-		continue;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\n')
+		i++;
 	line = malloc((i + 1) * sizeof(char));
 	if (line == NULL)
 		return (NULL);
@@ -85,29 +85,16 @@ char	*update_stash(char *stash)
 {
 	char	*new_stash;
 	size_t	i;
-	size_t	j;
 
-	if (stash == NULL)
-		return (NULL);
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	if (stash[i] == '\0')
+	if (!stash[i])
 	{
 		free(stash);
 		return (NULL);
 	}
-	new_stash = malloc((ft_strlen(stash) - i + 1) * sizeof(char));
-	if (new_stash == NULL)
-	{
-		free(stash);
-		return (NULL);
-	}
-	i++;
-	j = 0;
-	while (stash[i])
-		new_stash[j++] = stash[i++];
-	new_stash[j] = '\0';
+	new_stash = ft_strdup(stash + i + 1);
 	free(stash);
 	return (new_stash);
 }
@@ -116,7 +103,7 @@ char	*update_stash(char *stash)
 // int main()
 // {
 // 	int fd;
-// 	fd = open("only_nl.txt", O_RDONLY);
+// 	fd = open("giant_line.txt", O_RDONLY);
 // 	char *line = get_next_line(fd);
 // 	char *line2 = get_next_line(fd);
 // 	char *line3 = get_next_line(fd);
