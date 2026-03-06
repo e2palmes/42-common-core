@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/06 16:26:03 by ediba-de          #+#    #+#             */
+/*   Updated: 2026/03/06 16:36:11 by ediba-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <unistd.h>
 #include "get_next_line.h"
@@ -5,7 +17,7 @@
 char	*get_next_line(int fd)
 {
 	static char	*stash;
-	char *line;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -17,41 +29,41 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = _get_line(stash);
-	if (!line) // Si la création de la ligne échoue, on clean tout
-    {
-        free(stash);
-        stash = NULL;
-        return (NULL);
-    }
+	if (!line)
+	{
+		free(stash);
+		stash = NULL;
+		return (NULL);
+	}
 	stash = update_stash(stash);
 	return (line);
 }
 
-char    *set_stash(int fd, char *stash)
+char	*set_stash(int fd, char *stash)
 {
-    char    *buf;
-    int     bytes_read;
+	char	*buf;
+	int		bytes_read;
 
-    buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
-    if (!buf)
-        return (free(stash), NULL);
-    bytes_read = 1;
-    while (bytes_read > 0)
-    {
-        bytes_read = read(fd, buf, BUFFER_SIZE);
-        if (bytes_read == -1)
-            return (free(buf), free(stash), NULL);
-        if (bytes_read == 0)
-            break ;
-        buf[bytes_read] = '\0';
-        stash = ft_strjoin(stash, buf);
-        if (!stash) // Si strjoin échoue (malloc NULL_CHECK)
-            return (free(buf), NULL);
-        if (ft_strchr(buf, '\n')) // OPTIMISATION : on ne cherche que dans le buffer lu
-            break ;
-    }
-    free(buf);
-    return (stash);
+	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buf)
+		return (free(stash), NULL);
+	bytes_read = 1;
+	while (bytes_read > 0)
+	{
+		bytes_read = read(fd, buf, BUFFER_SIZE);
+		if (bytes_read == -1)
+			return (free(buf), free(stash), NULL);
+		if (bytes_read == 0)
+			break ;
+		buf[bytes_read] = '\0';
+		stash = ft_strjoin(stash, buf);
+		if (!stash)
+			return (free(buf), NULL);
+		if (ft_strchr(buf, '\n'))
+			break ;
+	}
+	free(buf);
+	return (stash);
 }
 
 char	*_get_line(char *stash)
