@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/11 20:47:35 by ediba-de          #+#    #+#             */
-/*   Updated: 2026/05/11 23:54:42 by ediba-de         ###   ########.fr       */
+/*   Created: 2026/05/11 23:57:01 by ediba-de          #+#    #+#             */
+/*   Updated: 2026/05/11 23:57:24 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 
-int	check_extension(char *file)
+int	close_game(t_game *game)
 {
-	int	len;
-
-	len = ft_strlen(file);
-	if (len < 5)
-		return (0);
-	return (!ft_strncmp(file + len - 4, ".ber", 4));
-}
-
-int	map_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
-
-int	error(char *msg)
-{
-	ft_printf("Error\n%s\n", msg);
+	free_game(game);
+	exit(0);
 	return (0);
 }

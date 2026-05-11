@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/11 20:47:35 by ediba-de          #+#    #+#             */
-/*   Updated: 2026/05/11 23:54:42 by ediba-de         ###   ########.fr       */
+/*   Created: 2026/05/11 23:57:34 by ediba-de          #+#    #+#             */
+/*   Updated: 2026/05/11 23:57:40 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 
-int	check_extension(char *file)
+int	init_mlx(t_game *game)
 {
-	int	len;
-
-	len = ft_strlen(file);
-	if (len < 5)
-		return (0);
-	return (!ft_strncmp(file + len - 4, ".ber", 4));
-}
-
-int	map_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
-
-int	error(char *msg)
-{
-	ft_printf("Error\n%s\n", msg);
-	return (0);
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		return (error("MLX init failed"));
+	game->win = mlx_new_window(game->mlx, game->width * 32,
+			game->height * 32, "so_long");
+	if (!game->win)
+		return (error("Window creation failed"));
+	return (1);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/11 23:54:58 by ediba-de          #+#    #+#             */
+/*   Updated: 2026/05/11 23:55:04 by ediba-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/so_long.h"
 
 int	validate_map(t_game *game)
@@ -31,10 +43,30 @@ int	is_rectangular(char **map)
 	return (1);
 }
 
+static int	check_tile(t_game *game, int x, int y)
+{
+	char	tile;
+
+	tile = game->map[y][x];
+	if (!ft_strchr("01PEC", tile))
+		return (0);
+	if (tile == 'P')
+	{
+		game->player_x = x;
+		game->player_y = y;
+		game->players++;
+	}
+	else if (tile == 'E')
+		game->exits++;
+	else if (tile == 'C')
+		game->collectibles++;
+	return (1);
+}
+
 int	check_components(t_game *game)
 {
-	int	y;
 	int	x;
+	int	y;
 
 	y = 0;
 	while (game->map[y])
@@ -42,23 +74,15 @@ int	check_components(t_game *game)
 		x = 0;
 		while (game->map[y][x])
 		{
-			if (!ft_strchr("01PEC", game->map[y][x]))
+			if (!check_tile(game, x, y))
 				return (0);
-			if (game->map[y][x] == 'P')
-			{
-				game->player_x = x;
-				game->player_y = y;
-				game->players++;
-			}
-			else if (game->map[y][x] == 'E')
-				game->exits++;
-			else if (game->map[y][x] == 'C')
-				game->collectibles++;
 			x++;
 		}
 		y++;
 	}
-	return (game->players == 1 && game->exits == 1 && game->collectibles >= 1);
+	return (game->players == 1
+		&& game->exits == 1
+		&& game->collectibles >= 1);
 }
 
 int	check_walls(t_game *game)
