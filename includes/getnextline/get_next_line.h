@@ -19,11 +19,10 @@
 #  define BUFFER_SIZE 5
 # endif
 
-size_t	ft_strlen(const char *str);
-char	*ft_strdup(const char *s);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(const char *str, int c);
+#include "../ft_printf/libft/libft.h"
 
+char	*ft_strdup(const char *s);
+char	*ft_strchr(const char *str, int c);
 char	*set_stash(int fd, char *stash);
 char	*_get_line(char *stash);
 char	*update_stash(char *stash);
