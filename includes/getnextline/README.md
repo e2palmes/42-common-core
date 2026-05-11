@@ -59,6 +59,6 @@ https://www.geeksforgeeks.org/c/static-variables-in-c/
 * Read function:
 https://www.w3schools.com/c/c_files_read.php
 
-Referenced also the LIBFT Project for some functions: ft_strjoin, ft_strlen, ft_strdup, ft_strchr
+Referenced also the LIBFT Project for some functions: gnl_strjoin, ft_strlen, ft_strdup, ft_strchr
 
 And used ChatGPT as help to write this README file, review code and track some bugs like memory leaks for example

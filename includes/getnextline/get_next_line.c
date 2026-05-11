@@ -56,7 +56,7 @@ char	*set_stash(int fd, char *stash)
 		if (bytes_read == 0)
 			break ;
 		buf[bytes_read] = '\0';
-		stash = ft_strjoin(stash, buf);
+		stash = gnl_strjoin(stash, buf);
 		if (!stash)
 			return (free(buf), NULL);
 		if (ft_strchr(buf, '\n'))
