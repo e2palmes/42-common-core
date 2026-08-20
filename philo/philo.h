@@ -14,10 +14,25 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
 # include <pthread.h>
 
 # define FALSE 0
 # define TRUE 1
+
+typedef struct s_philo	t_philo;
+typedef struct s_dinner	t_dinner;
+
+typedef enum e_status
+{
+    THINKING,
+    FORK,
+    EATING,
+    SLEEPING,
+    DEAD
+}	t_status;
 
 typedef struct	s_fork
 {
@@ -25,24 +40,9 @@ typedef struct	s_fork
 	int 			available;
 } 	t_fork;
 
-typedef struct s_philo
-{
-	int				nbr;
-	int				is_sleeping;
-	int				is_eating;
-	int				is_thinking;
-	int				is_dead;
-	int				meals_eaten;
-	long			last_meal;
-	t_dinner		*dinner;
-	t_fork 			*fork;
-	struct s_philo 	*left_philo;
-	struct s_philo	*right_philo;
-}					t_philo;
-
 typedef struct	s_dinner
 {
-	t_philo *philo;
+	t_philo		*philo;
 	int 		number_of_philosophers;
 	int 		time_to_die;
 	int 		time_to_eat;
@@ -54,4 +54,31 @@ typedef struct	s_dinner
 	pthread_mutex_t	stop_mutex;
 } 			t_dinner;
 
-#endif;
+typedef struct s_philo
+{
+	int				nbr;
+	int				is_sleeping;
+	int				is_eating;
+	int				is_thinking;
+	int				is_dead;
+	int				meals_eaten;
+	long			last_meal;
+	pthread_t		thread;
+	t_dinner		*dinner;
+	t_fork 			*fork;
+	pthread_mutex_t meal_mutex;
+	struct s_philo *left_philo;
+	struct s_philo	*right_philo;
+}					t_philo;
+
+int ft_atoi(const char *nb);
+int wait_for_time_to(long time_to_wait, t_dinner *dinner);
+t_dinner	*init_dinner(char **argv);
+t_philo *init_philosophers(int nbr_of_philos, t_dinner *dinner);
+int take_forks(t_philo *philo);
+long get_current_time();
+void set_stop_simulation(t_dinner *dinner, int stop_simulation);
+int get_stop_simulation(t_dinner *dinner);
+void print_status(t_philo *philo, t_status status);
+
+#endif
