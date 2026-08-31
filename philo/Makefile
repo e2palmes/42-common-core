@@ -5,7 +5,12 @@ CFLAGS		= -Wall -Wextra -Werror
 
 # Sources
 SRC			= 	philo.c \
-				utils.c
+				init.c \
+				utils.c \
+				forks.c \
+				routine.c \
+				monitor.c \
+				simulation.c
 
 OBJ			= $(SRC:.c=.o)
 
