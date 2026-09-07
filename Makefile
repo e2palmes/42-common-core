@@ -4,7 +4,14 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDLIBS = -lreadline
 
-SRC = main.c env.c
+SRC = main.c \
+	env.c \
+	builtin_env.c \
+	token.c \
+	lexer_utils.c \
+	lexer.c \
+	syntax.c
+
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
