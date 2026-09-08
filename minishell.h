@@ -54,5 +54,9 @@ void	commands_free(t_cmd *commands);
 t_token	*token_copy(t_token *source, t_token_type type);
 int		parser(t_token *tokens, t_cmd **commands);
 void	print_commands(t_cmd *commands);
+// expansion
+char		*env_strdup(const char *str);
+const char	*env_value(char **env, const char *name, size_t len);
+char		*expand_variable(t_shell *shell, const char *str, size_t *consumed);
 
 #endif

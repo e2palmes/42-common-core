@@ -13,7 +13,9 @@ SRC = main.c \
 	syntax.c \
 	command.c \
 	parser.c \
-	parser_debug.c
+	parser_debug.c \
+	env_value.c \
+	expand_variable.c
 
 OBJ = $(SRC:.c=.o)
 

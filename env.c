@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static char	*env_strdup(const char *str)
+char	*env_strdup(const char *str)
 {
 	char	*copy;
 	size_t	len;
