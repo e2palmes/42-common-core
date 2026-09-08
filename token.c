@@ -21,6 +21,7 @@ t_token	*token_new(char *str, size_t len, t_token_type type)
 		i++;
 	}
 	token->value[i] = '\0';
+	token->flags = 0;
 	token->type = type;
 	token->next = NULL;
 	return (token);

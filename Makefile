@@ -15,7 +15,11 @@ SRC = main.c \
 	parser.c \
 	parser_debug.c \
 	env_value.c \
-	expand_variable.c
+	expand_variable.c \
+	expand_buffer.c \
+	expand_scan.c \
+	expand_word.c \
+	expand_words.c
 
 OBJ = $(SRC:.c=.o)
 

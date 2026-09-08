@@ -9,6 +9,7 @@ t_cmd	*command_new(void)
 		return (NULL);
 	command->words = NULL;
 	command->redirs = NULL;
+	command->argv = NULL;
 	command->next = NULL;
 	return (command);
 }

@@ -21,7 +21,13 @@ static void	process_tokens(t_token *tokens, t_shell *shell)
 		shell->exit_status = 1;
 		return ;
 	}
-	print_commands(commands);
+	if (expand_words(commands, shell) != 0)
+	{
+		perror("minishell");
+		shell->exit_status = 1;
+	}
+	else
+		print_commands(commands);
 	commands_free(commands);
 }
 
