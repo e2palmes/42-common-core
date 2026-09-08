@@ -10,7 +10,10 @@ SRC = main.c \
 	token.c \
 	lexer_utils.c \
 	lexer.c \
-	syntax.c
+	syntax.c \
+	command.c \
+	parser.c \
+	parser_debug.c
 
 OBJ = $(SRC:.c=.o)
 

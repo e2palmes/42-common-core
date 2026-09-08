@@ -1,22 +1,28 @@
 #include "minishell.h"
 
-static void	print_tokens(t_token *token)
-{
-	while (token)
-	{
-		printf("type=%d value=[%s]\n", (int)token->type,
-			token->value);
-		token = token->next;
-	}
-}
+
 
 static void	lexer_error(int status, t_shell *shell)
 {
 	shell->exit_status = status;
 	if (status == 2)
-		write(2, "minishell: unclosed quote\n", 26);
+	write(2, "minishell: unclosed quote\n", 26);
 	else
+	perror("minishell");
+}
+
+static void	process_tokens(t_token *tokens, t_shell *shell)
+{
+	t_cmd	*commands;
+
+	if (parser(tokens, &commands) != 0)
+	{
 		perror("minishell");
+		shell->exit_status = 1;
+		return ;
+	}
+	print_commands(commands);
+	commands_free(commands);
 }
 
 static void	execute_line(char *line, t_shell *shell)
@@ -34,7 +40,7 @@ static void	execute_line(char *line, t_shell *shell)
 	if (status != 0)
 		shell->exit_status = status;
 	else
-		print_tokens(tokens);
+		process_tokens(tokens, shell);
 	tokens_free(tokens);
 }
 

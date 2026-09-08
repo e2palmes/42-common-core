@@ -24,6 +24,13 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_cmd
+{
+	t_token			*words;
+	t_token			*redirs;
+	struct s_cmd	*next;
+}	t_cmd;
+
 typedef struct s_shell
 {
 	char	**env;
@@ -41,6 +48,11 @@ int		lexer_operator(char c);
 size_t	lexer_word_len(char *str);
 int		lexer(char *line, t_token **tokens);
 int		syntax_check(t_token *tokens);
-
+// Parser
+t_cmd	*command_new(void);
+void	commands_free(t_cmd *commands);
+t_token	*token_copy(t_token *source, t_token_type type);
+int		parser(t_token *tokens, t_cmd **commands);
+void	print_commands(t_cmd *commands);
 
 #endif
