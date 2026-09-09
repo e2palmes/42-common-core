@@ -2,20 +2,22 @@
 
 static void	print_command_content(t_cmd *command)
 {
-	t_token	*token;
+	size_t	i;
+	t_token	*redir;
 
-	token = command->words;
-	while (token)
+	i = 0;
+	while (command->argv[i])
 	{
-		printf("  word=[%s]\n", token->value);
-		token = token->next;
+		printf("  argv[%zu]=[%s]\n", i, command->argv[i]);
+		i++;
 	}
-	token = command->redirs;
-	while (token)
+	printf("  argv[%zu]=NULL\n", i);
+	redir = command->redirs;
+	while (redir)
 	{
-		printf("  redir type=%d target=[%s]\n",
-			(int)token->type, token->value);
-		token = token->next;
+		printf("  redir type=%d target=[%s] flags=%d\n",
+			(int)redir->type, redir->value, redir->flags);
+		redir = redir->next;
 	}
 }
 

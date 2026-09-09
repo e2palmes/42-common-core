@@ -1,1 +1,1 @@
-# 42 Common Core
+# Minishell

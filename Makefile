@@ -19,7 +19,9 @@ SRC = main.c \
 	expand_buffer.c \
 	expand_scan.c \
 	expand_word.c \
-	expand_words.c
+	expand_words.c \
+	prepare_commands.c \
+	expand_redirs.c
 
 OBJ = $(SRC:.c=.o)
 

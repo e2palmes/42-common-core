@@ -21,6 +21,7 @@ void	commands_free(t_cmd *commands)
 	while (commands)
 	{
 		next = commands->next;
+		free(commands->argv);
 		tokens_free(commands->words);
 		tokens_free(commands->redirs);
 		free(commands);
