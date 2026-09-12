@@ -12,26 +12,6 @@
 
 #include "philo.h"
 
-int	all_philosophers_ate_enough(t_dinner *dinner)
-{
-	int	i;
-
-	i = 0;
-	while (i < dinner->number_of_philosophers)
-	{
-		pthread_mutex_lock(&dinner->philo[i].meal_mutex);
-		if (dinner->philo[i].meals_eaten
-			< dinner->number_of_times)
-		{
-			pthread_mutex_unlock(&dinner->philo[i].meal_mutex);
-			return (0);
-		}
-		pthread_mutex_unlock(&dinner->philo[i].meal_mutex);
-		i++;
-	}
-	return (1);
-}
-
 long	get_current_time(void)
 {
 	struct timeval	tv;
@@ -48,7 +28,7 @@ int	wait_for_time_to(long time_to_wait, t_dinner *dinner)
 	while (get_current_time() - start < time_to_wait)
 	{
 		if (get_stop_simulation(dinner))
-			return (1);
+			return (-1);
 		usleep(100);
 	}
 	return (0);

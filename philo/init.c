@@ -23,7 +23,7 @@ static void	init_philosopher(t_dinner *dinner, int i)
 	dinner->philo[i].is_thinking = FALSE;
 	dinner->philo[i].is_dead = FALSE;
 	dinner->philo[i].dinner = dinner;
-	dinner->philo[i].last_meal = dinner->start_time;
+	dinner->philo[i].last_meal = 0;
 	dinner->philo[i].fork = &dinner->fork[i];
 }
 
@@ -71,6 +71,8 @@ t_dinner	*init_dinner(char **argv)
 	t_dinner	*dinner;
 
 	dinner = malloc(sizeof(t_dinner));
+	if (!dinner)
+		return (NULL);
 	dinner->number_of_philosophers = ft_atoi(argv[1]);
 	dinner->time_to_die = ft_atoi(argv[2]);
 	dinner->time_to_eat = ft_atoi(argv[3]);
@@ -80,8 +82,8 @@ t_dinner	*init_dinner(char **argv)
 	else
 		dinner->number_of_times = -1;
 	dinner->stop_simulation = FALSE;
-	dinner->start_time = get_current_time();
-	pthread_mutex_init(&(dinner->stop_mutex), NULL);
-	pthread_mutex_init(&(dinner->print_mutex), NULL);
+	dinner->start_time = 0;
+	pthread_mutex_init(&dinner->stop_mutex, NULL);
+	pthread_mutex_init(&dinner->print_mutex, NULL);
 	return (dinner);
 }

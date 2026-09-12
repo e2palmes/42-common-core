@@ -41,19 +41,19 @@ void	print_status(t_philo *philo, t_status status)
 		return ;
 	}
 	if (status == DEAD)
-		printf("%ld %d died \n",
+		printf("%ld %d died\n",
 			(get_current_time() - philo->dinner->start_time), philo->nbr);
 	if (status == THINKING)
-		printf("%ld %d is thinking \n",
+		printf("%ld %d is thinking\n",
 			(get_current_time() - philo->dinner->start_time), philo->nbr);
 	if (status == FORK)
-		printf("%ld %d has taken a fork \n",
+		printf("%ld %d has taken a fork\n",
 			(get_current_time() - philo->dinner->start_time), philo->nbr);
 	if (status == EATING)
-		printf("%ld %d eating \n",
+		printf("%ld %d is eating\n",
 			(get_current_time() - philo->dinner->start_time), philo->nbr);
 	if (status == SLEEPING)
-		printf("%ld %d sleeping \n",
+		printf("%ld %d sleeping\n",
 			(get_current_time() - philo->dinner->start_time), philo->nbr);
 	pthread_mutex_unlock(&philo->dinner->print_mutex);
 }

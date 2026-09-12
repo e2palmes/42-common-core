@@ -20,7 +20,6 @@ static int	check_philosopher_death(t_dinner *dinner, int i)
 	pthread_mutex_lock(&philo->meal_mutex);
 	if (get_current_time() - philo->last_meal >= dinner->time_to_die)
 	{
-		philo->is_dead = TRUE;
 		pthread_mutex_unlock(&philo->meal_mutex);
 		set_stop_simulation(dinner, TRUE);
 		print_status(philo, DEAD);

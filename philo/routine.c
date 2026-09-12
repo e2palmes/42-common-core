@@ -16,25 +16,38 @@ static int	eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_current_time();
-	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->meal_mutex);
 	print_status(philo, EATING);
-	return (wait_for_time_to(philo->dinner->time_to_eat,
-			philo->dinner));
+	if (wait_for_time_to(philo->dinner->time_to_eat,
+			philo->dinner) == -1)
+		return (-1);
+	pthread_mutex_lock(&philo->meal_mutex);
+	philo->meals_eaten++;
+	pthread_mutex_unlock(&philo->meal_mutex);
+	return (0);
 }
 
-static int	sleep_philo(t_philo *philo)
+static int	think_philo(t_philo *philo, int first_cycle)
 {
-	print_status(philo, SLEEPING);
-	return (wait_for_time_to(philo->dinner->time_to_sleep,
-			philo->dinner));
+	print_status(philo, THINKING);
+	if (!first_cycle
+		&& philo->dinner->number_of_philosophers % 2 != 0)
+		return (wait_for_time_to(
+				philo->dinner->time_to_eat / 2,
+				philo->dinner));
+	return (0);
 }
 
 static void	*philosopher_loop(t_philo *philo)
 {
+	int	first_cycle;
+
+	first_cycle = TRUE;
 	while (!get_stop_simulation(philo->dinner))
 	{
-		print_status(philo, THINKING);
+		if (think_philo(philo, first_cycle) == -1)
+			return (NULL);
+		first_cycle = FALSE;
 		if (take_forks(philo) == -1)
 			return (NULL);
 		if (eat(philo) == -1)
@@ -43,7 +56,9 @@ static void	*philosopher_loop(t_philo *philo)
 			return (NULL);
 		}
 		release_forks(philo);
-		if (sleep_philo(philo) == -1)
+		print_status(philo, SLEEPING);
+		if (wait_for_time_to(philo->dinner->time_to_sleep,
+				philo->dinner) == -1)
 			return (NULL);
 	}
 	return (NULL);
@@ -54,7 +69,8 @@ static void	*single_philosopher(t_philo *philo)
 	print_status(philo, THINKING);
 	pthread_mutex_lock(&philo->fork->fork_mutex);
 	print_status(philo, FORK);
-	wait_for_time_to(philo->dinner->time_to_die, philo->dinner);
+	wait_for_time_to(philo->dinner->time_to_die,
+		philo->dinner);
 	pthread_mutex_unlock(&philo->fork->fork_mutex);
 	return (NULL);
 }
@@ -66,5 +82,9 @@ void	*philosopher_routine(void *data)
 	philo = (t_philo *)data;
 	if (philo->dinner->number_of_philosophers == 1)
 		return (single_philosopher(philo));
+	if (philo->nbr % 2 == 0
+		&& wait_for_time_to(philo->dinner->time_to_eat / 2,
+			philo->dinner) == -1)
+		return (NULL);
 	return (philosopher_loop(philo));
 }
