@@ -6,6 +6,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <errno.h>
 
 # define REDIR_QUOTED 1
 # define REDIR_AMBIGUOUS 2
@@ -15,6 +18,7 @@ typedef enum e_token_type
 	TOKEN_WORD,
 	TOKEN_PIPE,
 	TOKEN_IN,
+
 	TOKEN_OUT,
 	TOKEN_HEREDOC,
 	TOKEN_APPEND
@@ -40,6 +44,7 @@ typedef struct s_shell
 {
 	char	**env;
 	int		exit_status;
+	int		should_exit;
 }	t_shell;
 
 typedef struct s_expand
@@ -80,5 +85,12 @@ int		expand_word(const char *str, t_shell *shell, t_token **fields);
 int		expand_words(t_cmd *commands, t_shell *shell);
 int		expand_redirs(t_token *redirs, t_shell *shell);
 int		prepare_commands(t_cmd *commands, t_shell *shell);
+// execution d'une commande externe
+int		exec_message(const char *name, const char *message, int status);
+int		exec_error(const char *name, int error);
+int		exec_search(t_cmd *command, t_shell *shell);
+int		exec_external(t_cmd *command, t_shell *shell);
+int		execute_commands(t_cmd *commands, t_shell *shell);
+
 
 #endif

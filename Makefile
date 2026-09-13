@@ -21,7 +21,11 @@ SRC = main.c \
 	expand_word.c \
 	expand_words.c \
 	prepare_commands.c \
-	expand_redirs.c
+	expand_redirs.c \
+	exec_error.c \
+	exec_path.c \
+	exec_external.c \
+	execute.c
 
 OBJ = $(SRC:.c=.o)
 

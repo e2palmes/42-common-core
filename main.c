@@ -27,7 +27,7 @@ static void	process_tokens(t_token *tokens, t_shell *shell)
 		shell->exit_status = 1;
 	}
 	else
-		print_commands(commands);
+		shell->exit_status = execute_commands(commands, shell);
 	commands_free(commands);
 }
 
@@ -54,7 +54,7 @@ static void	shell_loop(t_shell *shell)
 {
 	char	*line;
 
-	while (1)
+	while (shell->should_exit == 0)
 	{
 		line = readline("minishell$ ");
 		if (line == NULL)
@@ -79,6 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	shell.exit_status = 0;
+	shell.should_exit = 0;
 	shell.env = env_copy(envp);
 	if (shell.env == NULL)
 	{
