@@ -25,7 +25,11 @@ SRC = main.c \
 	exec_error.c \
 	exec_path.c \
 	exec_external.c \
-	execute.c
+	execute.c \
+	write_string.c \
+	builtin_echo.c \
+	builtin_pwd.c \
+	builtins.c
 
 OBJ = $(SRC:.c=.o)
 

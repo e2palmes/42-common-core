@@ -39,6 +39,8 @@ static int	run_command(t_cmd *command, t_shell *shell)
 
 int	execute_commands(t_cmd *commands, t_shell *shell)
 {
+	int	status;
+
 	if (commands == NULL)
 		return (shell->exit_status);
 	if (commands->next || commands->redirs)
@@ -46,5 +48,8 @@ int	execute_commands(t_cmd *commands, t_shell *shell)
 				"pipes and redirections not implemented yet", 2));
 	if (commands->argv[0] == NULL)
 		return (0);
+	status = run_builtin(commands, shell);
+	if (status != -1)
+		return (status);
 	return (run_command(commands, shell));
 }

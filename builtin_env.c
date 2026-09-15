@@ -13,7 +13,8 @@ int	builtin_env(t_shell *shell)
 			j++;
 		if (shell->env[i][j] == '=')
 		{
-			if (printf("%s\n", shell->env[i]) < 0)
+			if (write_string(1, shell->env[i]) != 0
+				|| write_string(1, "\n") != 0)
 				return (1);
 		}
 		i++;

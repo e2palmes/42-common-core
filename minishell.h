@@ -91,6 +91,10 @@ int		exec_error(const char *name, int error);
 int		exec_search(t_cmd *command, t_shell *shell);
 int		exec_external(t_cmd *command, t_shell *shell);
 int		execute_commands(t_cmd *commands, t_shell *shell);
-
+// Les builtins
+int		write_string(int fd, const char *str);
+int		builtin_echo(char **argv);
+int		builtin_pwd(void);
+int		run_builtin(t_cmd *command, t_shell *shell);
 
 #endif
