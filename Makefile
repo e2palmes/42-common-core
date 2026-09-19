@@ -42,7 +42,10 @@ SRC = main.c \
 	builtin_exit.c \
 	fd_utils.c \
 	redirections.c \
-	execute_parent.c
+	execute_parent.c \
+	pipeline.c \
+	pipeline_child.c \
+	pipeline_wait.c
 
 OBJ = $(SRC:.c=.o)
 

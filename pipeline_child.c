@@ -1,0 +1,45 @@
+#include "minishell.h"
+
+void	pipeline_close(t_pipeline *pipeline)
+{
+	if (pipeline->input != -1)
+		close(pipeline->input);
+	if (pipeline->pipefd[0] != -1)
+		close(pipeline->pipefd[0]);
+	if (pipeline->pipefd[1] != -1)
+		close(pipeline->pipefd[1]);
+	pipeline->input = -1;
+	pipeline->pipefd[0] = -1;
+	pipeline->pipefd[1] = -1;
+}
+
+static int	connect_pipes(t_pipeline *pipeline)
+{
+	int	status;
+
+	status = 0;
+	if (pipeline->input != -1)
+		status = fd_redirect(pipeline->input, 0);
+	if (status == 0 && pipeline->pipefd[1] != -1)
+		status = fd_redirect(pipeline->pipefd[1], 1);
+	pipeline_close(pipeline);
+	return (status);
+}
+
+int	pipeline_child(t_cmd *command, t_shell *shell, t_pipeline *pipeline)
+{
+	int	status;
+
+	shell->should_exit = 1;
+	if (connect_pipes(pipeline) != 0)
+		return (1);
+	status = apply_redirections(command->redirs);
+	if (status != 0)
+		return (status);
+	if (command->argv[0] == NULL)
+		return (0);
+	status = run_builtin(command, shell);
+	if (status != -1)
+		return (status);
+	return (exec_external(command, shell));
+}

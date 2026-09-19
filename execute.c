@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	wait_child(pid_t pid)
+int	wait_child(pid_t pid)
 {
 	int	status;
 
@@ -31,35 +31,21 @@ static int	wait_child(pid_t pid)
 	return (1);
 }
 
-static int	run_command(t_cmd *command, t_shell *shell)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("minishell: fork");
-		return (1);
-	}
-	if (pid == 0)
-	{
-		shell->should_exit = 1;
-		if (apply_redirections(command->redirs) != 0)
-			return (1);
-		return (exec_external(command, shell));
-	}
-	return (wait_child(pid));
-}
-
 int	execute_commands(t_cmd *commands, t_shell *shell)
 {
+	t_cmd	*current;
+
 	if (commands == NULL)
 		return (shell->exit_status);
-	if (commands->next)
-		return (exec_message("pipes", "not implemented yet", 2));
-	if (has_heredoc(commands->redirs))
-		return (exec_message("heredoc", "not implemented yet", 2));
-	if (commands->argv[0] == NULL || is_builtin(commands->argv[0]))
+	current = commands;
+	while (current)
+	{
+		if (has_heredoc(current->redirs))
+			return (exec_message("heredoc", "not implemented yet", 2));
+		current = current->next;
+	}
+	if (commands->next == NULL && (commands->argv[0] == NULL
+			|| is_builtin(commands->argv[0])))
 		return (execute_parent(commands, shell));
-	return (run_command(commands, shell));
+	return (execute_pipeline(commands, shell));
 }

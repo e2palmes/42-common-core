@@ -147,4 +147,5 @@ int		pipeline_child(t_cmd *command, t_shell *shell,
 int		pipeline_wait(t_cmd *commands, int failed);
 int		execute_pipeline(t_cmd *commands, t_shell *shell);
 
+
 #endif
