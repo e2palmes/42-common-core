@@ -22,6 +22,9 @@
 # include <sys/stat.h>
 # include <errno.h>
 # include <limits.h>
+# include <fcntl.h>
+# include <signal.h>
+
 
 # define REDIR_QUOTED 1
 # define REDIR_AMBIGUOUS 2
@@ -50,6 +53,7 @@ typedef struct s_cmd
 	t_token			*words;
 	char			**argv;
 	t_token			*redirs;
+	pid_t			pid;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -69,6 +73,12 @@ typedef struct s_expand
 	char	quote;
 	t_token	*fields;
 }	t_expand;
+
+typedef struct s_pipeline
+{
+	int	input;
+	int	pipefd[2];
+}	t_pipeline;
 
 char	**env_copy(char **envp);
 void	env_free(char **env);
@@ -121,5 +131,20 @@ int		env_set_value(t_shell *shell, const char *name, const char *value);
 int		builtin_cd(char **argv, t_shell *shell);
 int		exit_number(const char *str, int *status);
 int		builtin_exit(char **argv, t_shell *shell);
+
+int		is_builtin(const char *name);
+int		fd_redirect(int source, int target);
+int		save_stdio(int saved[2]);
+int		restore_stdio(int saved[2]);
+int		has_heredoc(t_token *redirs);
+int		apply_redirections(t_token *redirs);
+int		execute_parent(t_cmd *command, t_shell *shell);
+
+int		wait_child(pid_t pid);
+void	pipeline_close(t_pipeline *pipeline);
+int		pipeline_child(t_cmd *command, t_shell *shell,
+			t_pipeline *pipeline);
+int		pipeline_wait(t_cmd *commands, int failed);
+int		execute_pipeline(t_cmd *commands, t_shell *shell);
 
 #endif

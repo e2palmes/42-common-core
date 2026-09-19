@@ -44,6 +44,8 @@ static int	run_command(t_cmd *command, t_shell *shell)
 	if (pid == 0)
 	{
 		shell->should_exit = 1;
+		if (apply_redirections(command->redirs) != 0)
+			return (1);
 		return (exec_external(command, shell));
 	}
 	return (wait_child(pid));
@@ -51,17 +53,13 @@ static int	run_command(t_cmd *command, t_shell *shell)
 
 int	execute_commands(t_cmd *commands, t_shell *shell)
 {
-	int	status;
-
 	if (commands == NULL)
 		return (shell->exit_status);
-	if (commands->next || commands->redirs)
-		return (exec_message("execution",
-				"pipes and redirections not implemented yet", 2));
-	if (commands->argv[0] == NULL)
-		return (0);
-	status = run_builtin(commands, shell);
-	if (status != -1)
-		return (status);
+	if (commands->next)
+		return (exec_message("pipes", "not implemented yet", 2));
+	if (has_heredoc(commands->redirs))
+		return (exec_message("heredoc", "not implemented yet", 2));
+	if (commands->argv[0] == NULL || is_builtin(commands->argv[0]))
+		return (execute_parent(commands, shell));
 	return (run_command(commands, shell));
 }

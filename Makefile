@@ -39,7 +39,10 @@ SRC = main.c \
 	env_assign.c \
 	builtin_cd.c \
 	exit_number.c \
-	builtin_exit.c
+	builtin_exit.c \
+	fd_utils.c \
+	redirections.c \
+	execute_parent.c
 
 OBJ = $(SRC:.c=.o)
 

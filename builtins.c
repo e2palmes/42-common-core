@@ -36,6 +36,17 @@ static int	run_env_builtin(char **argv, t_shell *shell)
 	return (-1);
 }
 
+int	is_builtin(const char *name)
+{
+	return (name_equal(name, "echo")
+		|| name_equal(name, "pwd")
+		|| name_equal(name, "env")
+		|| name_equal(name, "export")
+		|| name_equal(name, "unset")
+		|| name_equal(name, "cd")
+		|| name_equal(name, "exit"));
+}
+
 int	run_builtin(t_cmd *command, t_shell *shell)
 {
 	char	**argv;
