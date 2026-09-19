@@ -29,6 +29,8 @@
 # define REDIR_QUOTED 1
 # define REDIR_AMBIGUOUS 2
 
+extern volatile sig_atomic_t	g_signal;
+
 typedef enum e_token_type
 {
 	TOKEN_WORD,
@@ -158,5 +160,11 @@ char	*heredoc_expand(const char *line, t_shell *shell);
 int		heredoc_read(t_token *redir, t_shell *shell, int fd);
 int		prepare_heredocs(t_cmd *commands, t_shell *shell);
 void	close_heredocs(t_cmd *commands);
+
+void	signals_prompt(void);
+void	signals_wait(void);
+void	signals_child(void);
+void	signals_finish(t_shell *shell);
+char	*read_prompt(t_shell *shell);
 
 #endif

@@ -1,9 +1,21 @@
 #include "minishell.h"
 
+static int	heredoc_child(t_token *redir, t_shell *shell, int fd)
+{
+	int	status;
+
+	shell->should_exit = 1;
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
+	status = heredoc_read(redir, shell, fd);
+	close(fd);
+	return (status);
+}
+
 static int	collect_heredoc(t_token *redir, t_shell *shell)
 {
-	int	fd;
-	int	status;
+	int		fd;
+	pid_t	pid;
 
 	fd = heredoc_open(&redir->heredoc_fd);
 	if (fd == -1)
@@ -11,9 +23,17 @@ static int	collect_heredoc(t_token *redir, t_shell *shell)
 		perror("minishell: heredoc");
 		return (1);
 	}
-	status = heredoc_read(redir, shell, fd);
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("minishell: fork");
+		close(fd);
+		return (1);
+	}
+	if (pid == 0)
+		return (heredoc_child(redir, shell, fd));
 	close(fd);
-	return (status);
+	return (wait_child(pid));
 }
 
 int	prepare_heredocs(t_cmd *commands, t_shell *shell)

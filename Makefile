@@ -50,7 +50,9 @@ SRC = main.c \
 	heredoc_file.c \
 	heredoc_expand.c \
 	heredoc_read.c \
-	heredoc.c
+	heredoc.c \
+	input.c \
+	signals.c
 
 OBJ = $(SRC:.c=.o)
 

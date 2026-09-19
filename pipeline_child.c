@@ -31,6 +31,7 @@ int	pipeline_child(t_cmd *command, t_shell *shell, t_pipeline *pipeline)
 	int	status;
 
 	shell->should_exit = 1;
+	signals_child();
 	status = connect_pipes(pipeline);
 	if (status == 0)
 		status = apply_redirections(command->redirs);

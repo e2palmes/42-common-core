@@ -70,7 +70,7 @@ static void	shell_loop(t_shell *shell)
 
 	while (shell->should_exit == 0)
 	{
-		line = readline("minishell$ ");
+		line = read_prompt(shell);
 		if (line == NULL)
 		{
 			printf("exit\n");
@@ -81,6 +81,8 @@ static void	shell_loop(t_shell *shell)
 			add_history(line);
 			execute_line(line, shell);
 		}
+		if (shell->should_exit == 0)
+			signals_finish(shell);
 		free(line);
 	}
 	rl_clear_history();
