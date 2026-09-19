@@ -26,6 +26,7 @@ static void	lexer_error(int status, t_shell *shell)
 static void	process_tokens(t_token *tokens, t_shell *shell)
 {
 	t_cmd	*commands;
+	int		status;
 
 	if (parser(tokens, &commands) != 0)
 	{
@@ -33,13 +34,14 @@ static void	process_tokens(t_token *tokens, t_shell *shell)
 		shell->exit_status = 1;
 		return ;
 	}
-	if (prepare_commands(commands, shell) != 0)
-	{
+	status = prepare_commands(commands, shell);
+	if (status != 0)
 		perror("minishell");
-		shell->exit_status = 1;
-	}
 	else
-		shell->exit_status = execute_commands(commands, shell);
+		status = prepare_heredocs(commands, shell);
+	if (status == 0 && shell->should_exit == 0)
+		status = execute_commands(commands, shell);
+	shell->exit_status = status;
 	commands_free(commands);
 }
 

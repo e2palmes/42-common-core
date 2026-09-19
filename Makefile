@@ -45,7 +45,12 @@ SRC = main.c \
 	execute_parent.c \
 	pipeline.c \
 	pipeline_child.c \
-	pipeline_wait.c
+	pipeline_wait.c \
+	heredoc_file_utils.c \
+	heredoc_file.c \
+	heredoc_expand.c \
+	heredoc_read.c \
+	heredoc.c
 
 OBJ = $(SRC:.c=.o)
 

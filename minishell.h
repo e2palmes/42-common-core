@@ -45,6 +45,7 @@ typedef struct s_token
 	t_token_type	type;
 	char			*value;
 	int				flags;
+	int				heredoc_fd;
 	struct s_token	*next;
 }	t_token;
 
@@ -76,8 +77,9 @@ typedef struct s_expand
 
 typedef struct s_pipeline
 {
-	int	input;
-	int	pipefd[2];
+	int		input;
+	int		pipefd[2];
+	t_cmd	*commands;
 }	t_pipeline;
 
 char	**env_copy(char **envp);
@@ -147,5 +149,14 @@ int		pipeline_child(t_cmd *command, t_shell *shell,
 int		pipeline_wait(t_cmd *commands, int failed);
 int		execute_pipeline(t_cmd *commands, t_shell *shell);
 
+// heredocs
+int		expand_init(t_expand *exp);
+void	copy_hd_template(char *path);
+int		heredoc_open_error(int *read_fd, int write_fd);
+int		heredoc_open(int *read_fd);
+char	*heredoc_expand(const char *line, t_shell *shell);
+int		heredoc_read(t_token *redir, t_shell *shell, int fd);
+int		prepare_heredocs(t_cmd *commands, t_shell *shell);
+void	close_heredocs(t_cmd *commands);
 
 #endif

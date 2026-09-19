@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	expand_init(t_expand *exp)
+int	expand_init(t_expand *exp)
 {
 	exp->buffer = env_strdup("");
 	exp->len = 0;

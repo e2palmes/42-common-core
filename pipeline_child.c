@@ -31,9 +31,10 @@ int	pipeline_child(t_cmd *command, t_shell *shell, t_pipeline *pipeline)
 	int	status;
 
 	shell->should_exit = 1;
-	if (connect_pipes(pipeline) != 0)
-		return (1);
-	status = apply_redirections(command->redirs);
+	status = connect_pipes(pipeline);
+	if (status == 0)
+		status = apply_redirections(command->redirs);
+	close_heredocs(pipeline->commands);
 	if (status != 0)
 		return (status);
 	if (command->argv[0] == NULL)

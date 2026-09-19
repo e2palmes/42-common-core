@@ -34,6 +34,7 @@ int	execute_pipeline(t_cmd *commands, t_shell *shell)
 	t_pipeline	pipeline;
 	t_cmd		*current;
 
+	pipeline.commands = commands;
 	pipeline.input = -1;
 	pipeline.pipefd[0] = -1;
 	pipeline.pipefd[1] = -1;
