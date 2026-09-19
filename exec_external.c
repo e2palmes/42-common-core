@@ -23,9 +23,22 @@ static int	exec_direct(t_cmd *command, t_shell *shell)
 
 int	exec_external(t_cmd *command, t_shell *shell)
 {
+	t_shell	child;
+	int		status;
+
 	if (command->argv[0][0] == '\0')
 		return (exec_message("", "command not found", 127));
+	child = *shell;
+	child.env = env_for_exec(shell->env);
+	if (child.env == NULL)
+	{
+		perror("minishell");
+		return (1);
+	}
 	if (has_slash(command->argv[0]))
-		return (exec_direct(command, shell));
-	return (exec_search(command, shell));
+		status = exec_direct(command, &child);
+	else
+		status = exec_search(command, &child);
+	free(child.env);
+	return (status);
 }

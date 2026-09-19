@@ -29,7 +29,17 @@ SRC = main.c \
 	write_string.c \
 	builtin_echo.c \
 	builtin_pwd.c \
-	builtins.c
+	builtins.c \
+	env_edit.c \
+	builtin_export.c \
+	builtin_unset.c \
+	export_sort.c \
+	export_print.c \
+	env_exec.c \
+	env_assign.c \
+	builtin_cd.c \
+	exit_number.c \
+	builtin_exit.c
 
 OBJ = $(SRC:.c=.o)
 

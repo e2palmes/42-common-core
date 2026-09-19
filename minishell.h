@@ -9,6 +9,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <errno.h>
+# include <limits.h>
 
 # define REDIR_QUOTED 1
 # define REDIR_AMBIGUOUS 2
@@ -96,5 +97,17 @@ int		write_string(int fd, const char *str);
 int		builtin_echo(char **argv);
 int		builtin_pwd(void);
 int		run_builtin(t_cmd *command, t_shell *shell);
+size_t	env_key_len(const char *entry);
+int		env_index(char **env, const char *name, size_t len);
+int		env_set(t_shell *shell, const char *entry);
+char	**env_sorted(char **env);
+int		export_list(t_shell *shell);
+int		builtin_export(char **argv, t_shell *shell);
+int		builtin_unset(char **argv, t_shell *shell);
+char	**env_for_exec(char **env);
+int		env_set_value(t_shell *shell, const char *name, const char *value);
+int		builtin_cd(char **argv, t_shell *shell);
+int		exit_number(const char *str, int *status);
+int		builtin_exit(char **argv, t_shell *shell);
 
 #endif
