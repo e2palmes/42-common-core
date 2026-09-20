@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 16:55:11 by ediba-de          #+#    #+#             */
-/*   Updated: 2026/09/20 01:02:49 by ediba-de         ###   ########.fr       */
+/*   Updated: 2026/09/20 03:21:58 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_cmd	*command_new(void)
 	command->words = NULL;
 	command->redirs = NULL;
 	command->argv = NULL;
+	command->pid = 0;
 	command->next = NULL;
 	return (command);
 }
