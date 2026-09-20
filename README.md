@@ -106,8 +106,4 @@ There is only one global variable, `g_signal`, which stores the received signal 
 - [Linux manual pages](https://man7.org/linux/man-pages/), especially `fork`, `execve`, `pipe`, `dup2`, `waitpid`, and `signal`.
 - [GNU Make manual](https://www.gnu.org/software/make/manual/make.html) for the Makefile.
 
-### AI use
-
-I used ChatGPT for step-by-step help with the project, including code suggestions and generation, explanations, debugging, and test ideas. This covered parsing, expansion, builtins, execution, pipes, redirections, heredocs, and signals. It also helped with the Makefile, file organization, and this README.
-
-I am responsible for checking the suggestions against the subject, testing the code, and being able to explain what I submit.
+AI was used mainly to help with testing, debugging and explanations.
