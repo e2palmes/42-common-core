@@ -6,7 +6,7 @@
 /*   By: ediba-de <ediba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 16:55:11 by ediba-de          #+#    #+#             */
-/*   Updated: 2026/09/20 01:32:41 by ediba-de         ###   ########.fr       */
+/*   Updated: 2026/09/20 04:12:28 by ediba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <signal.h>
+# include <string.h>
 
 # define REDIR_QUOTED 1
 # define REDIR_AMBIGUOUS 2
