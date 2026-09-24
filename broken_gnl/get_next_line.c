@@ -1,30 +1,115 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-//stdio is not needed, just let him for test with main
-#include <stdio.h>
+#include "get_next_line.h"
 
-char	*get_next_line(int fd)
+char *ft_strchr(char *s, int c)
 {
-	char	*ret = malloc(9999);
-	char	c;
-	int		i = 0;
-	int		bytes_read = 0;
-
-	if (fd < 0)
-		return (NULL);
-	while ((bytes_read = read(fd, &c, 1)) > 0)
-	{
-		ret[i] = c;
+	int i = 0;
+	while(s[i] && s[i] != c)
 		i++;
-		if (c == '\n')
-			break ;
-	}
-	if (i == 0 || bytes_read < 0)
-	{
-		free(ret);
+	if (s[i] == c)
+		return s + i;
+	else
 		return (NULL);
+}
+
+void *ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t i = 0;
+	while (i < n)
+	{
+		((char *)dest)[i] = ((char *)src)[i];
+		i++;
 	}
-	ret[i] = '\0';
-	return (ret);
+	return dest;
+}
+
+size_t ft_strlen(char *s)
+{
+	size_t res = 0;
+	if (!s)
+		return (0);
+	while (*s)
+	{
+		s++;
+		res++;
+	}
+	return res;
+}
+
+int str_append_mem(char **s1, char *s2, size_t size2)
+{
+	size_t size1 = ft_strlen(*s1);
+	char *tmp = malloc(size2 + size1 + 1);
+	if (!tmp)
+		return 0;
+	ft_memcpy(tmp, *s1, size1);
+	ft_memcpy(tmp + size1, s2, size2);
+	tmp[size1 + size2] = '\0';
+	free(*s1);
+	*s1 = tmp;
+	return 1; 
+}
+
+int str_append_str(char **s1, char *s2)
+{
+	return str_append_mem(s1, s2, ft_strlen(s2));
+}
+
+void *ft_memmove(void *dest, const void *src, size_t n)
+{
+	if (dest < src)
+		return ft_memcpy(dest, src, n);
+	else if (dest == src)
+		return dest;
+	while (n > 0)
+	{
+		((char *)dest)[n - 1] = ((char *)src)[n - 1];
+		n--;
+	}
+	return dest;
+}
+
+char *get_next_line(int fd)
+{
+	static char b[BUFFER_SIZE + 1];
+	char *ret = NULL;
+	char *tmp;
+	ssize_t read_ret;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	while (1)
+	{
+		tmp = ft_strchr(b, '\n');
+		if (tmp)
+		{
+			if (!str_append_mem(&ret, b, tmp - b + 1))
+			{
+				b[0] = '\0';
+				free(ret);
+				return (NULL);
+			}
+			ft_memmove(b, tmp + 1, ft_strlen(tmp + 1) + 1);
+			return ret;
+		}
+		if (!str_append_str(&ret, b))
+		{
+			b[0] = '\0';
+			free(ret);
+			return (NULL);
+		}
+		read_ret = read(fd, b, BUFFER_SIZE);
+		if (read_ret < 0)
+		{
+			b[0] = '\0';
+			free(ret);
+			return (NULL);
+		}
+		b[read_ret] = '\0';
+		if (read_ret == 0)
+		{
+			if (ret[0] == '\0')
+				return (free(ret), NULL);
+			return (ret);
+		}
+	}
 }
